@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registration | SugarAngel
+{% endblock title %}
+
+{% block content %}
+    <div class="container" style="margin-top:70px;min-height:600px;">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3"> Are you sure, you want to delete your profile?</h4>
+        <hr style="border-color:#b8bfc2;">
+          <form action="{% url 'delete user' pk=object.pk %}" method="post">
+{#        <form action="{% url 'delete user' pk=request.user.pk %}" method="post">#}
+
+              {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+
+      </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+
+
+
