@@ -5,8 +5,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('coffeshop.accounts.urls')),
-    path('products/', include('coffeshop.products.urls')),
+    path('accounts/', include('coffeshop.accounts.urls')),
+    path('', include('coffeshop.products.urls')),
+    path('orders/', include('coffeshop.orders.urls')),
+    # path('', include('coffeshop.accounts.urls')),
+    # path('products/', include('coffeshop.products.urls')),
 ]
 
 if settings.DEBUG:

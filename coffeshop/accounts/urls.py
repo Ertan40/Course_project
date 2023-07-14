@@ -1,10 +1,12 @@
 from django.urls import path, include
 
+
 from coffeshop.accounts.views import IndexView, SignUpView, SignInView, SignOutView, UserDetailsView, UserEditView, \
     UserDeleteView
 
 urlpatterns = (
     path('', IndexView.as_view(), name='index'),
+    # path('accounts', accounts, name='accounts'),
     path('register/', SignUpView.as_view(), name='register user'),
     path('login/', SignInView.as_view(), name='login user'),
     path('logout/', SignOutView.as_view(), name='logout user'),

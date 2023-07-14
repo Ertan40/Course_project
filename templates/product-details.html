@@ -21,15 +21,15 @@ SugarAngel | Online Shopping
       </div>
       <div class="col-4 my-3 pic-box">
         {% if products.trending %}
-          <div class="hot">Hot</div>
+          <div class="hot">Recommended</div>
           {% endif %}
           <img src="{{products.product_image.url}}"  class="card-image-top" alt="{{products}}">
       </div>
       <div class="col-8 my-3">
           <h5 class="text-success">{{products | upper}}</h5>
-          <p>{{products.vendor}}</p>
+{#          <p>{{products.vendor}}</p>#}
           <p>{{products.description}}</p>
-          <h6 class="my-2 text-danger">Price : <s>{{products.price}}</s></h6>
+          <h5 class="my-2 text-primary">Price : <s>{{products.price}}</s></h5>
 {#          <h5 class="my-2 text-primary">Offer Price   : Rs.{{products.selling_price}}</h5>#}
           <div class="my-3">
             {% if products.quantity > 0 %}

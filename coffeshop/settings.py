@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     # my apps
     'coffeshop.accounts',
     'coffeshop.products',
+    'coffeshop.orders',
 
 ]
 

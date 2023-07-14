@@ -22,8 +22,8 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='products/', validators=(validate_file_size,), null=True,
                                       blank=True)
     price = models.FloatField(null=False, blank=False)
+    quantity = models.IntegerField(null=False, blank=False)
     description = models.TextField(max_length=450, validators=(MinLengthValidator(10),), null=True, blank=True)
-    inscription = models.CharField(max_length=300, null=True, blank=True)
     status = models.BooleanField(default=False, help_text="0-show,1-Hidden")
     trending = models.BooleanField(default=False, help_text="0-default,1-Trending")
 
