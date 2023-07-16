@@ -10,7 +10,7 @@ from coffeshop.accounts.forms import UserCreateForm
 UserModel = get_user_model()
 
 class IndexView(views.TemplateView):
-    template_name = 'index.html'
+    template_name = 'common/index.html'
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -46,7 +46,7 @@ class UserDetailsView(views.DetailView):
 class UserEditView(views.UpdateView):
     template_name = 'accounts/user-edit-page.html'
     model = UserModel
-    fields = ('first_name', 'last_name', 'email')
+    fields = ('first_name', 'last_name', 'age', 'email')
 
     def get_success_url(self):
         return reverse_lazy('user details', kwargs={'pk', self.request.user.pk})

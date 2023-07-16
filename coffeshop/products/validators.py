@@ -6,3 +6,4 @@ def validate_file_size(value):
 
     if value.size > MB_LIMIT * 1024 * 1024:
         raise ValidationError(f"The maximum file size can be uploaded is {MB_LIMIT} MB")
+

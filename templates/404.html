@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+
+{% block title %}
+    404 Error | SugarAngel
+{% endblock title %}
+
+{% block content %}
+
+<div class="not-found">
+        <h1>
+            Uh oh, something broke.
+        </h1>
+
+        <h3>Error 404 - page not found.</h3>
+        <!-- Link to Home Page -->
+        <a href="{% url 'index' %}">
+            <p class="my-2"> <b>Return to SugarAngel</b> </p>
+
+        </a>
+    </div>
+
+{% endblock %}

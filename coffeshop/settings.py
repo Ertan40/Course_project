@@ -14,8 +14,9 @@ SECRET_KEY = 'django-insecure-dd*x3=w8_=_w5-fpqhx+4%hix5)+po^jz58-kg*n#av%11%$0z
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+# DEBUG = False
+#
+# ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,6 +86,10 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+
+# if DEBUG:
+#     AUTH_PASSWORD_VALIDATORS = []
+# else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -5,13 +5,13 @@ import json
 from coffeshop.orders.models import Favourite, Cart
 from coffeshop.products.models import Product
 
-
+#TODO NOT LOGGED USERS ARE NOT ABLE TO CHECK fav and cart - work on it
 # Create your views here.
 def favourite_view_page(request):
     if request.user.is_authenticated:
         favourite = Favourite.objects.filter(user=request.user)
         context = {'favourite': favourite}
-        return render(request, 'favourite.html', context)
+        return render(request, 'orders/favourite.html', context)
     else:
         redirect('/')
 
@@ -27,7 +27,7 @@ def cart_page(request):
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user)
         context = {'cart': cart}
-        return render(request, 'cart.html', context)
+        return render(request, 'orders/cart.html', context)
     else:
         return redirect('/')
 

@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'common/base.html' %}
 
 {% block title %}
-    Registration | SugarAngel
+    Edit | SugarAngel
 {% endblock title %}
 
 {% block content %}
@@ -14,6 +14,18 @@
 
               {% csrf_token %}
               {{ form.as_p }}
+{#                <div class="mb-4">#}
+{#                    First name: {{ form.first_name }}#}
+{#                </div>#}
+{#                <div class="mb-4">#}
+{#                    Last name: {{ form.last_name }}#}
+{#                </div>#}
+{#                <div class="mb-4">#}
+{#                    Age: {{ form.age }}#}
+{#                </div>#}
+{#                <div class="mb-4">#}
+{#                    Email: {{ form.email }}#}
+{#                </div>#}
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
 

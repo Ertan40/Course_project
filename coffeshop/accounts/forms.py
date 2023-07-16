@@ -6,10 +6,6 @@ UserModel = get_user_model()
 
 
 class UserCreateForm(auth_forms.UserCreationForm):
-    #TODO
-    # placeholders ={
-    #     'username': 'Username: '
-    # }   OR add as templatetag
     class Meta:
         model = UserModel
         fields = ('username', 'email')
@@ -17,10 +13,12 @@ class UserCreateForm(auth_forms.UserCreationForm):
 
 
 
+
 class UserEditForm(auth_forms.UserChangeForm):
     class Meta:
         model = UserModel
-        fields = ('first_name',)
-        field_classes = {"username": UsernameField}
+        # fields = ('first_name',)
+        fields = '__all__'
+        field_classes = {"username": auth_forms.UsernameField}
 
 

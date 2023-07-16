@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'common/base.html' %}
+{% load placeholders %}
 {% block title %}
   Registration | SugarAngel
 {% endblock title %}
@@ -8,31 +9,27 @@
       <div class="col-12">
         <h4 class="mb-3"> New User Registration</h4>
         <hr style="border-color:#b8bfc2;">
-        {% include 'message.html' %}
+        {% include 'common/message.html' %}
       </div>
     </div>
     <section class="py-4" >
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <form method="post" action="">
+            <form method="post" action="{% url 'register user' %}">
               {% csrf_token %}
-              <div class="mb-4">
-                <label for="" class="form-label">User Name</label>
-                {{form.username}}
-              </div>
-              <div class="mb-4">
-                <label for="" class="form-label">User Email</label>
-                {{form.email}}
-              </div>
-              <div class="mb-4">
-                <label for="" class="form-label">Password</label>
-                {{form.password1}}
-              </div>
-              <div class="mb-4">
-                <label for="" class="form-label">Confirm Password</label>
-                {{form.password2}}
-              </div>
+                <div class="mb-4">
+                    {{ form.username|placeholder:'Username' }}
+                </div>
+                <div class="mb-4">
+                    {{ form.email|placeholder:'Email' }}
+                </div>
+                <div class="mb-4">
+                    {{ form.password1|placeholder:'Password' }}
+                </div>
+                <div class="mb-4">
+                    {{ form.password2|placeholder:'Repeat password' }}
+                </div>
               <button type="submit" class="btn btn-primary">Register</button>
             </form>
             <p class="my-2">Already user ? <a href="{% url 'login user' %}">Login Now</a> </p>
@@ -64,21 +61,3 @@
 
 
 
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
-{#</head>#}
-{#<head>Sign-up page!</head>#}
-{##}
-{#<form action="{% url 'register user' %}" method="post">#}
-{#    {% csrf_token %}#}
-{#    {{ form.as_p }}#}
-{#    <button>Sign up</button>#}
-{##}
-{#</form>#}
-{#<body>#}
-{##}
-{#</body>#}
-{#</html>#}

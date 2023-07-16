@@ -1,4 +1,4 @@
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
 from coffeshop.products.validators import validate_file_size
 
@@ -21,8 +21,8 @@ class Product(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
     product_image = models.ImageField(upload_to='products/', validators=(validate_file_size,), null=True,
                                       blank=True)
-    price = models.FloatField(null=False, blank=False)
-    quantity = models.IntegerField(null=False, blank=False)
+    price = models.FloatField(null=False, blank=False, validators=(MinValueValidator(0.0),))
+    quantity = models.PositiveIntegerField(null=False, blank=False)
     description = models.TextField(max_length=450, validators=(MinLengthValidator(10),), null=True, blank=True)
     status = models.BooleanField(default=False, help_text="0-show,1-Hidden")
     trending = models.BooleanField(default=False, help_text="0-default,1-Trending")

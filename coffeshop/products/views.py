@@ -7,7 +7,7 @@ from coffeshop.products.models import Category, Product
 
 def index(request):
      products = Product.objects.all()
-     return render(request, "index.html", {"products": products})
+     return render(request, "common/index.html", {"products": products})
 
 
 
@@ -15,7 +15,7 @@ def catalogue(request):
     category = Category.objects.filter(status=0)
     context = {'category': category}
 
-    return render(request, 'catalogue.html', context)
+    return render(request, 'products/catalogue.html', context)
 
 
 def catalogue_view(request, name):
@@ -27,7 +27,7 @@ def catalogue_view(request, name):
     }
 
     if category:
-        return render(request, 'index.html', context)
+        return render(request, 'common/index.html', context)
     else:
         messages.warning(request, 'No such Category found')
         return redirect('catalogue.html')
@@ -39,7 +39,7 @@ def product_details(request, cat_name, pro_name):
     if category:
         if products:
             products = Product.objects.filter(name=pro_name, status=0).first()
-            return render(request, 'product-details.html', {'products': products})
+            return render(request, 'products/product-details.html', {'products': products})
         else:
             messages.error(request, 'No such Product found')
             return redirect('catalogue')
