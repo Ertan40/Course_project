@@ -1,12 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends 'common/base.html' %}
 
-<body>User details!</body>
-<body>
+{% block title %}
+    User Details | SugarAngel
+{% endblock title %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container" style="margin-top:70px;min-height:600px;">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3"> User details</h4>
+        <hr style="border-color:#b8bfc2;">
+          <p>Username: {{ object.username }}</p>
+    {% if  object.get_full_name %}
+        <p>Name: {{ object.get_full_name }}</p>
+    {% endif %}
+
+        {% if is_owner %}
+
+        <p>Email: {{ object.email }}</p>
+        {% if  object.age %}
+            <p>Age: {{ object.age }}</p>
+        {% endif %}
+        <p>Type user:
+            {% if object.is_staff %}
+                staff
+            {% else %}
+                regular
+            {% endif %}
+        </p>
+        <p>
+        <hr style="border-color:#b8bfc2;">
+            <a class="edit-link" href="{% url 'edit user' pk=object.pk %}">
+                <button type="submit" class="btn btn-primary">Edit</button></a>
+
+            <a class="edit-link" href="{% url 'delete user' pk=object.pk %}">
+                <button type="submit" class="btn btn-primary">Delete</button></a>
+        </p>
+
+        {% endif %}
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

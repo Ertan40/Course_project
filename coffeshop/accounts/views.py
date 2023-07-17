@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -23,13 +23,30 @@ class SignUpView(views.CreateView):
     form_class = UserCreateForm
     success_url = reverse_lazy('index')
 
+    # check here
+    # def form_valid(self, form):
+    #     user = form.save()
+    #     login(self.request, user)
+    #     return redirect(self.success_url)
+
+
+# class CreateUpStaffView(PermissionRequiredMixin, views.CreateView):
+#     permission_required = 'accounts.add_account'
+#     template_name = 'accounts/register-staff-user.html'
+#     form_class = UserCreateStaffForm
+#     success_url = reverse_lazy('index')
+
 
 class SignInView(LoginView):
     template_name = 'accounts/login-page.html'
+    success_url = reverse_lazy('index')
+    # def get_success_url(self):
 
 
 class SignOutView(LogoutView):
-    template_name = 'accounts/logout-page.html'
+    # template_name = 'accounts/logout-page.html'
+    next_page = reverse_lazy('index')
+
 
 
 
@@ -37,10 +54,10 @@ class UserDetailsView(views.DetailView):
     template_name = 'accounts/user-details-page.html'
     model = UserModel
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['is_owner'] = self.request.user == self.object
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_owner'] = self.request.user == self.object
+        return context
 
 
 class UserEditView(views.UpdateView):
@@ -48,8 +65,11 @@ class UserEditView(views.UpdateView):
     model = UserModel
     fields = ('first_name', 'last_name', 'age', 'email')
 
+    # TODO: CHECK why not redirecting to # http://127.0.0.1:8000/accounts/user/3/
     def get_success_url(self):
-        return reverse_lazy('user details', kwargs={'pk', self.request.user.pk})
+        return reverse_lazy('user details', kwargs={
+            'pk': self.request.user.pk,
+        })
 
 
 class UserDeleteView(views.DeleteView):

@@ -30,5 +30,12 @@ class UserAdmin(auth_admin.UserAdmin):
         ),
         (("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
+    list_display = ('username', 'email', 'is_staff', 'get_groups')
+
+    def get_groups(self, obj):
+        return ", ".join([group.name for group in obj.groups.all()])
+
+    get_groups.short_description = 'Groups'
+
 
 

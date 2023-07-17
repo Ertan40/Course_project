@@ -1,0 +1,19 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+  Registration | SugarAngel
+{% endblock title %}
+{% block content %}
+    <h1>SITE ADMIN SECTION</h1>
+    {% if  request.user.is_staff %}
+        <ul class="staff-rights-list">
+            <li><a href="{% url 'register staff user' %}">Add staff</a></li>
+{#            <li><a href="{% url 'add movie' %}">Add product</a></li>#}
+
+        </ul>
+    {% else %}
+        <h2>You do not have rights.</h2>
+    {% endif %}
+
+{% endblock %}

@@ -5,7 +5,7 @@ import json
 from coffeshop.orders.models import Favourite, Cart
 from coffeshop.products.models import Product
 
-#TODO NOT LOGGED USERS ARE NOT ABLE TO CHECK fav and cart - work on it
+
 # Create your views here.
 def favourite_view_page(request):
     if request.user.is_authenticated:
