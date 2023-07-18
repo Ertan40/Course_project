@@ -19,7 +19,7 @@ def favourite_view_page(request):
 def remove_favourite(request, fav_id):
     item = Favourite.objects.filter(id=fav_id).get()
     item.delete()
-    return redirect('/favviewpage')
+    return redirect('favourite view page')
 
 
 
@@ -37,7 +37,7 @@ def cart_page(request):
 def remove_cart(request, cart_id):
     cart_item = Cart.objects.filter(id=cart_id).get()
     cart_item.delete()
-    return redirect('/cart')
+    return redirect('cart')
 
 
 def favourite_page(request):

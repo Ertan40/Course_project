@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -6,6 +6,7 @@ from django.views import generic as views
 
 
 from coffeshop.accounts.forms import UserCreateForm
+
 
 UserModel = get_user_model()
 
@@ -23,11 +24,11 @@ class SignUpView(views.CreateView):
     form_class = UserCreateForm
     success_url = reverse_lazy('index')
 
-    # check here
-    # def form_valid(self, form):
-    #     user = form.save()
-    #     login(self.request, user)
-    #     return redirect(self.success_url)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect(self.success_url)
 
 
 # class CreateUpStaffView(PermissionRequiredMixin, views.CreateView):
@@ -57,6 +58,7 @@ class UserDetailsView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['is_owner'] = self.request.user == self.object
+        # context['cart'] = Cart.objects.filter(user=self.object.pk)
         return context
 
 
@@ -65,7 +67,6 @@ class UserEditView(views.UpdateView):
     model = UserModel
     fields = ('first_name', 'last_name', 'age', 'email')
 
-    # TODO: CHECK why not redirecting to # http://127.0.0.1:8000/accounts/user/3/
     def get_success_url(self):
         return reverse_lazy('user details', kwargs={
             'pk': self.request.user.pk,

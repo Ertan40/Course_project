@@ -24,7 +24,7 @@
            {# TODO: DECIDE IF NO ITEMS WHETHER TO DISPLAY, SAME REFERS TO FAVOURITE #}
             {% for item in cart %}
            <tr>
-              <td><img src="{{item.product.product_image.url}}" height="75px" alt="{{item.product.name}}"></td>
+              <td><img src="{{item.product.product_image.url}}" height="75px" width="85px" alt="{{item.product.name}}"></td>
               <td>{{item.product.name}}</td>
               <td>{{item.product.price | floatformat:2}}</td>
               <td>{{item.product_qty}}</td>
