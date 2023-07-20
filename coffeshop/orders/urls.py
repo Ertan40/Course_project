@@ -10,3 +10,4 @@ urlpatterns = (
     path('remove_cart/<str:cart_id>', views.remove_cart, name="remove cart"),
 
 )
+

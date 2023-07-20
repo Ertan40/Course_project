@@ -1,22 +1,26 @@
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 
 
-from coffeshop.accounts.forms import UserCreateForm
-
+from coffeshop.accounts.forms import UserCreateForm, UserCreateStaffForm
 
 UserModel = get_user_model()
 
 class IndexView(views.TemplateView):
     template_name = 'common/index.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['permissions'] = self.request.user.has_perm('accounts.view_appuser')
-    #     return context
+    def get_context_data(self, **kwargs):   ########
+        context = super().get_context_data(**kwargs)
+        context['permissions'] = self.request.user.has_perm('accounts.view_appuser')
+        return context
+
+
+class AdminIndexView(LoginRequiredMixin, views.TemplateView): ##########
+    template_name = 'common/index-admin.html'
 
 
 class SignUpView(views.CreateView):
@@ -31,11 +35,11 @@ class SignUpView(views.CreateView):
         return redirect(self.success_url)
 
 
-# class CreateUpStaffView(PermissionRequiredMixin, views.CreateView):
-#     permission_required = 'accounts.add_account'
-#     template_name = 'accounts/register-staff-user.html'
-#     form_class = UserCreateStaffForm
-#     success_url = reverse_lazy('index')
+class CreateUpStaffView(PermissionRequiredMixin, views.CreateView): ####
+    permission_required = 'accounts.add_account'
+    template_name = 'accounts/register-staff-user.html'
+    form_class = UserCreateStaffForm
+    success_url = reverse_lazy('index')
 
 
 class SignInView(LoginView):
@@ -77,3 +81,5 @@ class UserDeleteView(views.DeleteView):
     template_name = 'accounts/user-delete-page.html'
     model = UserModel
     success_url = reverse_lazy('index')
+
+

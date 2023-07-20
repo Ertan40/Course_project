@@ -2,18 +2,41 @@
 {% load static %}
 
 {% block title %}
-  Registration | SugarAngel
+  Registration staff | SugarAngel
 {% endblock title %}
 {% block content %}
-    <h1>SITE ADMIN SECTION</h1>
-    {% if  request.user.is_staff %}
-        <ul class="staff-rights-list">
-            <li><a href="{% url 'register staff user' %}">Add staff</a></li>
-{#            <li><a href="{% url 'add movie' %}">Add product</a></li>#}
+    <div class="container" style="margin-top:70px;min-height:600px;">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3"> Register staff user</h4>
+        <hr style="border-color:#b8bfc2;">
 
-        </ul>
+    {% if  request.user.is_staff %}
+
+        <form action="{% url 'register staff user' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                    <h6>Username:</h6>
+                    {{ form.username }}
+                </div>
+                <div class="mb-4">
+                    <h6>Email:</h6>
+                    {{ form.email }}
+                </div>
+                <div class="mb-4">
+                    <h6>Password:</h6>
+                    {{ form.password }}
+                </div>
+                <div class="mb-4">
+                    <h6>Groups</h6>
+                    {{ form.groups}}
+                </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
     {% else %}
         <h2>You do not have rights.</h2>
     {% endif %}
-
+      </div>
+    </div>
+    </div>
 {% endblock %}

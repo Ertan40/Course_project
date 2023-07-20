@@ -15,26 +15,26 @@ class UserCreateForm(auth_forms.UserCreationForm):
 
 
 
-# class UserCreateStaffForm(forms.ModelForm):
-#     groups = forms.ModelMultipleChoiceField(queryset=Group.objects.all().order_by('name'))
-#
-#     class Meta:
-#         model = UserModel
-#         fields = ('username', 'email', 'password', 'groups')
-#
-#         widgets = {
-#             'password': forms.PasswordInput(),
-#         }
-#
-#     def save(self, commit=True):
-#         user = super().save(commit=False)
-#         password = self.cleaned_data['password']
-#         user.set_password(password)
-#         user.is_staff = True
-#         if commit:
-#             user.save()
-#             user.groups.set(self.cleaned_data['groups'])
-#         return user
+class UserCreateStaffForm(forms.ModelForm):  #####
+    groups = forms.ModelMultipleChoiceField(queryset=Group.objects.all().order_by('name'))
+
+    class Meta:
+        model = UserModel
+        fields = ('username', 'email', 'password', 'groups')
+
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        password = self.cleaned_data['password']
+        user.set_password(password)
+        user.is_staff = True
+        if commit:
+            user.save()
+            user.groups.set(self.cleaned_data['groups'])
+        return user
 
 
 class UserEditForm(auth_forms.UserChangeForm):

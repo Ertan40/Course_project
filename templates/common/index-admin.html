@@ -1,0 +1,25 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+  Admin Section | SugarAngel
+{% endblock title %}
+{% block content %}
+    <div class="container" style="margin-top:70px;" >
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3"> SITE ADMIN SECTION</h4>
+    {% if  request.user.is_staff %}
+        <ul class="staff-rights-list">
+            <li><a href="{% url 'register staff user' %}">Add staff</a></li>
+
+
+        </ul>
+    {% else %}
+        <h2>You do not have rights.</h2>
+    {% endif %}
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

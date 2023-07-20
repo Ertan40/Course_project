@@ -19,7 +19,10 @@
         {% endif %}
           <a class="nav-link" href="{% url 'catalogue' %}"><i class="fa fa-cubes"></i> Catalogue</a>
           <a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a>
-{#
+        {% if request.user.is_staff %} {#  #}
+          <a class="nav-link" aria-current="page" href="{% url 'admin index' %}"><i class="fa fa-edit"></i> Admin</a>
+          <a class="nav-link" aria-current="page" href="{% url 'register staff user' %}"><i class="fa fa-user-plus"></i> Add staff</a>
+        {% endif %}
       </div>
     </div>
   </div>

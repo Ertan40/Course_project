@@ -13,19 +13,24 @@
           <form action="{% url 'edit user' pk=request.user.pk %}" method="post">
 
               {% csrf_token %}
-              {{ form.as_p }}
-{#                <div class="mb-4">#}
-{#                    First name: {{ form.first_name }}#}
-{#                </div>#}
-{#                <div class="mb-4">#}
-{#                    Last name: {{ form.last_name }}#}
-{#                </div>#}
-{#                <div class="mb-4">#}
-{#                    Age: {{ form.age }}#}
-{#                </div>#}
-{#                <div class="mb-4">#}
-{#                    Email: {{ form.email }}#}
-{#                </div>#}
+{#              {{ form.as_p }}#}
+              <div class="mb-4">
+                    <h6>First name:</h6>
+                    {{ form.first_name }}
+                </div>
+                <div class="mb-4">
+                    <h6>Last name:</h6>
+                    {{ form.last_name }}
+                </div>
+                <div class="mb-4">
+                    <h6>Age:</h6>
+                    {{ form.age }}
+                </div>
+                <div class="mb-4">
+                    <h6>Email:</h6>
+                    {{ form.email }}
+                </div>
+
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
 
