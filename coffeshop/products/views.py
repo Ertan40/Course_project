@@ -5,7 +5,7 @@ from coffeshop.products.models import Category, Product
 
 def index(request):
      products = Product.objects.all()
-     # products = Product.objects.filter(trending=1)   
+     # products = Product.objects.filter(trending=1)
      return render(request, "common/index.html", {"products": products})
 
 
