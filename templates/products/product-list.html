@@ -1,0 +1,29 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+  Edit product | SugarAngel
+{% endblock title %}
+{% block content %}
+    <div class="container" style="margin-top:70px;min-height:600px;">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3"> Product list </h4>
+        <hr style="border-color:#b8bfc2;">
+
+    {% if  request.user.is_staff %}
+            <ul>
+                 {% for item in product %}
+                      <li>
+                          {{ item.name }} - <a href="{% url 'edit product' pk=item.pk %}">Edit</a>
+                          - <a href="{% url 'delete product' pk=item.pk %}">Delete</a>
+                      </li>
+                 {% endfor %}
+            </ul>
+    {% else %}
+        <h2>You do not have rights.</h2>
+    {% endif %}
+      </div>
+    </div>
+    </div>
+{% endblock %}

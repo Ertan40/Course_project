@@ -12,6 +12,9 @@
     {% if  request.user.is_staff %}
         <ul class="staff-rights-list">
             <li><a href="{% url 'register staff user' %}">Add staff</a></li>
+            <li><a href="{% url 'add product' %}">Add product</a></li>
+{#            <li><a href="{% url 'edit product' pk=product.pk %}">Edit product</a></li>#}
+{#            <li><a href="{% url 'delete product' pk=pk %}">Delete product</a></li>#}
 
 
         </ul>

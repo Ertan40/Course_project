@@ -8,6 +8,5 @@ urlpatterns = (
     path('favviewpage', views.favourite_view_page, name="favourite view page"),
     path('remove_fav/<str:fav_id>', views.remove_favourite, name="remove favourite"),
     path('remove_cart/<str:cart_id>', views.remove_cart, name="remove cart"),
-
 )
 

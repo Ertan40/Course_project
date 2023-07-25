@@ -1,0 +1,59 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}
+  Edit product | SugarAngel
+{% endblock title %}
+{% block content %}
+    <div class="container" style="margin-top:70px;min-height:600px;">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3"> Edit product</h4>
+        <hr style="border-color:#b8bfc2;">
+
+    {% if  request.user.is_staff %}
+
+        <form action="{% url 'edit product' pk=product.pk %}" method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                    <h6>Category:</h6>
+                    {{ form.category }}
+                </div>
+                <div class="mb-4">
+                    <h6>Name:</h6>
+                    {{ form.name }}
+                </div>
+                <div class="mb-4">
+                    <h6>Product image:</h6>
+                    {{ form.product_image }}
+                </div>
+                <div class="mb-4">
+                    <h6>Price</h6>
+                    {{ form.price}}
+                </div>
+                <div class="mb-4">
+                    <h6>Quantity:</h6>
+                    {{ form.quantity }}
+                </div>
+                <div class="mb-4">
+                    <h6>Description:</h6>
+                    {{ form.description }}
+                </div>
+                <div class="mb-4">
+                    <h6>Status:</h6>
+                    {{ form.status }}
+                </div>
+                <div class="mb-4">
+                    <h6>Trending</h6>
+                    {{ form.trending }}
+                </div>
+
+            <button type="submit" class="btn btn-primary">Edit product</button>
+        </form>
+    {% else %}
+        <h2>You do not have rights.</h2>
+    {% endif %}
+      </div>
+    </div>
+    </div>
+{% endblock %}

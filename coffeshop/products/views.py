@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+
+from coffeshop.products.forms import ProductCreateForm, ProductEditForm, ProductDeleteForm
 from coffeshop.products.models import Category, Product
 # Create your views here.
+
 
 def index(request):
      products = Product.objects.all()
      # products = Product.objects.filter(trending=1)
      return render(request, "common/index.html", {"products": products})
-
 
 
 def catalogue(request):
@@ -46,3 +49,61 @@ def product_details(request, cat_name, pro_name):
     else:
         messages.error(request, 'No such Category found')
         return redirect('catalogue')
+
+@login_required
+def add_product(request):
+    if request.POST == 'GET':
+        form = ProductCreateForm()
+    else:
+        form = ProductCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+    context = {'form': form}
+    return render(request, 'products/add-product.html', context)
+
+@login_required
+def edit_product(request, pk):
+    product = Product.objects.filter(pk=pk).get()
+
+    if request.method == 'GET':
+        form = ProductEditForm(instance=product)
+    else:
+        form = ProductEditForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('product list')
+
+    context = {'form': form, 'product': product}
+
+    return render(request, 'products/edit-product.html', context)
+
+@login_required
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        product.delete()
+        return redirect('product list')
+
+    return render(request, 'products/delete-product.html', {'product': product})
+
+
+def product_list(request):
+    product = Product.objects.all()
+    context = {'product': product}
+    return render(request, 'products/product-list.html', context)
+
+# @login_required
+# def delete_product(request, pk):
+    # product = Product.objects.filter(pk=pk).get()
+    # if request.method == 'GET':
+    #     form = ProductDeleteForm(instance=product)
+    # else:
+    #     form = ProductDeleteForm(request.POST, instance=product)
+    #     product.delete()
+    #     return redirect('index')
+    #
+    # context = {'form': form, 'product': product}
+    # return render(request, 'products/delete-product.html', context)

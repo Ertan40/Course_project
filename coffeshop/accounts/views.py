@@ -4,22 +4,24 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
+from django.contrib import messages
 
 
 from coffeshop.accounts.forms import UserCreateForm, UserCreateStaffForm
 
 UserModel = get_user_model()
 
+
 class IndexView(views.TemplateView):
     template_name = 'common/index.html'
 
-    def get_context_data(self, **kwargs):   ########
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['permissions'] = self.request.user.has_perm('accounts.view_appuser')
         return context
 
 
-class AdminIndexView(LoginRequiredMixin, views.TemplateView): ##########
+class AdminIndexView(LoginRequiredMixin, views.TemplateView):
     template_name = 'common/index-admin.html'
 
 
@@ -28,14 +30,14 @@ class SignUpView(views.CreateView):
     form_class = UserCreateForm
     success_url = reverse_lazy('index')
 
-
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
+        messages.success(self.request, 'Your Registration is Successful! Welcome to our website!')
         return redirect(self.success_url)
 
 
-class CreateUpStaffView(PermissionRequiredMixin, views.CreateView): ####
+class CreateUpStaffView(PermissionRequiredMixin, views.CreateView):
     permission_required = 'accounts.add_account'
     template_name = 'accounts/register-staff-user.html'
     form_class = UserCreateStaffForm
@@ -45,14 +47,15 @@ class CreateUpStaffView(PermissionRequiredMixin, views.CreateView): ####
 class SignInView(LoginView):
     template_name = 'accounts/login-page.html'
     success_url = reverse_lazy('index')
-    # def get_success_url(self):
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Invalid Username or Password')
+        return super().form_invalid(form)
 
 
 class SignOutView(LogoutView):
     # template_name = 'accounts/logout-page.html'
     next_page = reverse_lazy('index')
-
-
 
 
 class UserDetailsView(views.DetailView):

@@ -22,6 +22,7 @@
         {% if request.user.is_staff %} {#  #}
           <a class="nav-link" aria-current="page" href="{% url 'admin index' %}"><i class="fa fa-edit"></i> Admin</a>
           <a class="nav-link" aria-current="page" href="{% url 'register staff user' %}"><i class="fa fa-user-plus"></i> Add staff</a>
+          <a class="nav-link" aria-current="page" href="{% url 'add product' %}"><i class="fa fa-product-hunt"></i> Add product</a>
         {% endif %}
       </div>
     </div>

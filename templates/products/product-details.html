@@ -22,7 +22,7 @@ SugarAngel | Online Shopping
       <div class="col-4 my-3 pic-box">
         {% if products.trending %}
           <div class="hot">Trend</div>
-          {% endif %}
+        {% endif %}
           <img src="{{products.product_image.url}}" width='350px' height='300px' class="card-image-top" alt="{{products}}">
       </div>
       <div class="col-8 my-3">
@@ -44,8 +44,8 @@ SugarAngel | Online Shopping
             {% else %}
             <button class="btn btn-secondary"><i class="fa fa-minus"></i> Not available</button>
             {% endif %}
-{#            <button class="btn btn-danger" id="btnFav"><i class="fa fa-heart"></i></button>#}
             <button class="btn btn-danger" id="btnFav" data-favourite-url="{% url 'favourite' %}"><i class="fa fa-heart"></i></button>
+
           </div>
       </div>
     </div>
