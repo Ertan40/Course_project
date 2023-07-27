@@ -18,4 +18,5 @@
   
 1. <b>Home Page (/)</b>:
     - <p>Landing page of the website.</p>
+      <p><img src="./SugarAngel_homepage.png" alt="SugarAngel-home" width="600px"></p>
       
