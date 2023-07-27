@@ -1,0 +1,43 @@
+{% extends 'common/base.html' %}
+{% load placeholders %}
+{% block title %}
+Checkout | SugarAngel
+{% endblock title %}
+{% block content %}
+<section class="bg-light py-4 my-5" style="min-height: 600px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">Checkout</h4>
+                <hr style="border-color: #b8bfc2;">
+            </div>
+            <div class="col-12">
+                <form method="post" action="{% url 'checkout' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                    <h6>Address:</h6>
+                    {{ form.address|placeholder:'Enter your address' }}
+                </div>
+                <div class="mb-4">
+                    <h6>Phone:</h6>
+                    {{ form.phone|placeholder:'Enter your phone' }}
+                </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-sm">Place Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+
+
+
+
+
+
+

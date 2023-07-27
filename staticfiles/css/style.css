@@ -49,3 +49,16 @@ a {
   right: 20px;
   z-index: 10;
 }
+
+.badge-success {
+    background-color: #28a745;
+    color: #fff;
+
+}
+
+/* Custom CSS for Pending status */
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+
+}

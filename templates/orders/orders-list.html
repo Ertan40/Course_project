@@ -1,0 +1,62 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block title %}
+Order List | SugarAngel
+{% endblock title %}
+{% block content %}
+<section class="bg-light py-4 my-5" style="min-height: 600px;">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> {# TODO work on pending styles #}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">Order List</h4>
+                <hr style="border-color: #b8bfc2;">
+            </div>
+            <div class="col-12">
+                {% if orders %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Customer</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td><img src="{{order.product.product_image.url}}" height="75px" width="85px" alt="{{ order.product.name }}"></td>
+                            <td>{{ order.user.username }}</td>
+                            <td>{{ order.product.name }}</td>
+                            <td>{{ order.price | floatformat:2}} Euro</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>{{order.total_amount | floatformat:2}} Euro</td>
+                            <td>{{ order.date }}</td>
+                            {% if order.status %}
+                            <td><small class="badge badge-success">Completed</small></td>
+
+                            {%else%}
+                            <td><small class="badge badge-warning">Pending</small></td>
+                            {% endif %}
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <form method="post" action="{% url 'clear orders' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Clear Orders</button>
+                </form>
+                {% else %}
+                <p>No orders found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

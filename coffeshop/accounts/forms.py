@@ -6,7 +6,6 @@ from django.contrib.auth.forms import UsernameField
 UserModel = get_user_model()
 
 
-
 class UserCreateForm(auth_forms.UserCreationForm):
     class Meta:
         model = UserModel
@@ -14,8 +13,7 @@ class UserCreateForm(auth_forms.UserCreationForm):
         field_classes = {'username': auth_forms.UsernameField}
 
 
-
-class UserCreateStaffForm(forms.ModelForm):  #####
+class UserCreateStaffForm(forms.ModelForm):
     groups = forms.ModelMultipleChoiceField(queryset=Group.objects.all().order_by('name'))
 
     class Meta:

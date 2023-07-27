@@ -13,7 +13,7 @@
 
     {% if  request.user.is_staff %}
 
-        <form action="{% url 'edit product' pk=product.pk %}" method="post">
+        <form action="{% url 'edit product' pk=product.pk %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-4">
                     <h6>Category:</h6>

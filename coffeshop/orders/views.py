@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 
-from coffeshop.orders.models import Favourite, Cart
+from coffeshop.orders.forms import CheckoutForm
+from coffeshop.orders.models import Favourite, Cart, Order
 from coffeshop.products.models import Product
 
 
-# Create your views here.
 def favourite_view_page(request):
     if request.user.is_authenticated:
         favourite = Favourite.objects.filter(user=request.user)
@@ -22,7 +22,6 @@ def remove_favourite(request, fav_id):
     return redirect('favourite view page')
 
 
-
 def cart_page(request):
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user=request.user)
@@ -30,8 +29,6 @@ def cart_page(request):
         return render(request, 'orders/cart.html', context)
     else:
         return redirect('/')
-
-
 
 
 def remove_cart(request, cart_id):
@@ -76,3 +73,67 @@ def add_to_cart(request):
                         return JsonResponse({'status': 'Product currently unavailable'}, status=200)
         return JsonResponse({'status': 'Login to add Cart'}, status=200)
     return JsonResponse({'status': 'Invalid access!'}, status=200)
+
+
+def checkout_page(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CheckoutForm(request.POST)
+            if form.is_valid():
+                address = form.cleaned_data['address']
+                phone = form.cleaned_data['phone']
+                user = request.user
+                cart_items = Cart.objects.filter(user=user)
+                # print(cart_items)
+                # print(phone)
+                # checked and works, so getting the data in order to save in DB
+                for cart_item in cart_items:
+                    product = cart_item.product
+                    price = cart_item.product.price
+                    order = Order.objects.create(
+                        user=user,
+                        product=product,
+                        price=price,
+                        quantity=cart_item.product_qty,
+                        address=address,
+                        phone=phone,
+                    )
+                    order.save()
+                # TODO decide how to proceed
+                # Clear the cart from the session
+                request.session['cart'] = {}
+
+                return redirect('order success')  # Redirect to the order success page
+        else:
+            form = CheckoutForm()
+
+        return render(request, 'orders/checkout.html', {'form': form})
+    else:
+        return redirect('/')
+
+
+def order_success_page(request):
+    return render(request, 'orders/order-success.html')
+
+
+def orders_list(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            order = Order.objects.filter(user=request.user)
+            # clear the orders from DB
+            order.delete()
+            return redirect('orders list')
+        else:
+            # retrieve the orders for the current user
+            orders = Order.objects.filter(user=request.user)
+            context = {'orders': orders}
+            return render(request, 'orders/orders-list.html', context)
+    else:
+        return redirect('/')
+
+
+def clear_orders(request):  # TODO : Think how to improve here
+    if request.user.is_authenticated:
+        # Clear the orders from the database
+        Order.objects.filter(user=request.user).delete()
+    return redirect('orders list')

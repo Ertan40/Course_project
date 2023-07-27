@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
-from coffeshop.products.forms import ProductCreateForm, ProductEditForm, ProductDeleteForm
+from coffeshop.products.forms import ProductCreateForm, ProductEditForm
 from coffeshop.products.models import Category, Product
 # Create your views here.
 
@@ -58,7 +58,7 @@ def add_product(request):
         form = ProductCreateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('product list')
 
     context = {'form': form}
     return render(request, 'products/add-product.html', context)
@@ -89,21 +89,10 @@ def delete_product(request, pk):
 
     return render(request, 'products/delete-product.html', {'product': product})
 
-
+@login_required
 def product_list(request):
     product = Product.objects.all()
     context = {'product': product}
     return render(request, 'products/product-list.html', context)
 
-# @login_required
-# def delete_product(request, pk):
-    # product = Product.objects.filter(pk=pk).get()
-    # if request.method == 'GET':
-    #     form = ProductDeleteForm(instance=product)
-    # else:
-    #     form = ProductDeleteForm(request.POST, instance=product)
-    #     product.delete()
-    #     return redirect('index')
-    #
-    # context = {'form': form, 'product': product}
-    # return render(request, 'products/delete-product.html', context)
+
