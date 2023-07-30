@@ -1,17 +1,22 @@
 {% extends 'common/base.html' %}
 
+{% load static %}
 {% block title %}
     404 Error | SugarAngel
 {% endblock title %}
 
 {% block content %}
 
-<div class="not-found">
-        <h1>
-            Uh oh, something broke.
-        </h1>
+<div class="not-found-img">
+        <img src="{% static 'images/404.jpg' %}" alt="404 not found image">
+    </div>
 
-        <h3>Error 404 - page not found.</h3>
+<div class="not-found">
+{#        <h1>#}
+{#            Uh oh, something broke.#}
+{#        </h1>#}
+{##}
+{#        <h3>Error 404 - page not found.</h3>#}
         <!-- Link to Home Page -->
         <a href="{% url 'index' %}">
             <p class="my-2"> <b>Return to SugarAngel</b> </p>

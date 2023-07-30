@@ -6,7 +6,7 @@ from coffeshop.products.models import Product, Category
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'status')
+    list_display = ('name', 'category', 'quantity', 'trending', 'status')
 
 
 

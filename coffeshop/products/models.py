@@ -14,8 +14,6 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
 
 
-
-
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=False, blank=False)
@@ -26,7 +24,6 @@ class Product(models.Model):
     description = models.TextField(max_length=450, validators=(MinLengthValidator(10),), null=True, blank=True)
     status = models.BooleanField(default=False, help_text="0-show,1-Hidden")
     trending = models.BooleanField(default=False, help_text="0-default,1-Trending")
-
 
     def __str__(self):
         return self.name

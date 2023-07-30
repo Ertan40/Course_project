@@ -28,7 +28,7 @@ SugarAngel | Online Shopping
       <div class="col-8 my-3">
           <h5 class="text-success">{{products | upper}}</h5>
           <p>{{products.description}}</p>
-          <h5 class="my-2 text-primary">Price : {{products.price}} Euro</h5>
+          <h5 class="my-2 text-primary">Price : {{products.price | floatformat:2}} Euro</h5>
           <div class="my-3">
             {% if products.quantity > 0 %}
             <input type="hidden" value="{{products.id}}" id="pid">
