@@ -3,7 +3,8 @@ from django.contrib.auth import admin as auth_admin, get_user_model
 
 from coffeshop.accounts.forms import UserCreateForm, UserEditForm
 
-# password: Xyz@1234!
+# password: Xyz@1234!    TestUser  (staff user)
+# password: password    ertan  (superuser)
 
 UserModel = get_user_model()
 

@@ -52,10 +52,20 @@ class SignInView(LoginView):
         messages.error(self.request, 'Invalid Username or Password')
         return super().form_invalid(form)
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'You logged in successfully')
+        return response
+
 
 class SignOutView(LogoutView):
     # template_name = 'accounts/logout-page.html'
     next_page = reverse_lazy('index')
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.success(request, 'You logged out successfully.')
+        return response
 
 
 class UserDetailsView(views.DetailView):
