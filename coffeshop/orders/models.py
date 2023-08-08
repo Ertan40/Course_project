@@ -5,7 +5,6 @@ import datetime
 from coffeshop.orders.validators import validate_only_numbers
 from coffeshop.products.models import Product
 
-# Create your models here.
 UserModel = get_user_model()
 
 

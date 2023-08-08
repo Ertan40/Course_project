@@ -99,7 +99,6 @@ def checkout_page(request):
                         phone=phone,
                     )
                     order.save()
-                # TODO decide how to proceed
                 # Clear the cart from the session
                 request.session['cart'] = {}
 
@@ -132,7 +131,7 @@ def orders_list(request):
         return redirect('/')
 
 
-def clear_orders(request):  # TODO : Think how to improve here
+def clear_orders(request):
     if request.user.is_authenticated:
         # Clear the orders from the database
         Order.objects.filter(user=request.user).delete()

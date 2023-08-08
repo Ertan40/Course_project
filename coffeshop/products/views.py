@@ -50,6 +50,7 @@ def product_details(request, cat_name, pro_name):
         messages.error(request, 'No such Category found')
         return redirect('catalogue')
 
+
 @login_required
 def add_product(request):
     if request.POST == 'GET':
@@ -62,6 +63,7 @@ def add_product(request):
 
     context = {'form': form}
     return render(request, 'products/add-product.html', context)
+
 
 @login_required
 def edit_product(request, pk):
@@ -79,6 +81,7 @@ def edit_product(request, pk):
 
     return render(request, 'products/edit-product.html', context)
 
+
 @login_required
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -88,6 +91,7 @@ def delete_product(request, pk):
         return redirect('product list')
 
     return render(request, 'products/delete-product.html', {'product': product})
+
 
 @login_required
 def product_list(request):

@@ -7,7 +7,6 @@ from django.conf import settings
 UserModel = get_user_model()
 
 
-
 @receiver(signal=post_save, sender=UserModel)
 def send_greeting_email_after_registration(instance, created, **kwargs):
     if not created:
@@ -17,9 +16,9 @@ def send_greeting_email_after_registration(instance, created, **kwargs):
 
     send_mail(
         subject='Your registration is successful!',
-        message="Welcome to SugarAngel CoffeeShop "
+        message="Welcome to SugarAngel CoffeeShop! "
                 "We're delighted to have you here. "
-                "Please check our Catalogue and let's us know which desert is your favourite"
+                "Please check our Catalogue and let's us know which desert is your favourite."
                 "Have a lovely day :)",
         from_email=settings.EMAIL_HOST_USER,
         recipient_list=(user_email, ),

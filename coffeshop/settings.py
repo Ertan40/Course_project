@@ -29,14 +29,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my apps
-    'coffeshop.accounts',
+    'coffeshop.accounts.apps.UserAppConfig',
     'coffeshop.products',
     'coffeshop.orders',
 
 ]
 
 MIDDLEWARE = [
-    # TODO - test whether works properly
     'coffeshop.middlewares.HandleExceptionMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
