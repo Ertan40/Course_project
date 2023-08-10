@@ -19,4 +19,10 @@
 1. <b>Home Page (/)</b>:
     - <p>Landing page of the website.</p>
       <p><img src="./SugarAngel_homepage.png" alt="SugarAngel-home" width="600px"></p>
+
+2. <b>Admin Section (admin/):</b>
+   #### Configured admin section with the following two groups:
+   - Admins: Full control over the system. 
+   - UserAdmin: CRUD operations for orders and products. Can review users.
+     <p><img src="./admin.png" alt="ctrs-admin" width="600px">
       
